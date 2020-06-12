@@ -46,13 +46,14 @@ s.push(player) # [player class, ]
 
 print("start", player.current_room)
 visited_new=set()
-
+room_path = []
 while s.size()> 0:
-    player = s.pop()
+    player = s.pop() # 
    
 #     # get the directions to go to from the current room
     if player.current_room.id not in visited:
         valid_directions = player.current_room.get_exits() # [n,]
+        
         
         directions_to_go_to = {}
         for direction in valid_directions:
@@ -63,6 +64,7 @@ while s.size()> 0:
       
         
         visited.add(player.current_room.id)
+        room_path.append(player.current_room.id)
    
     
 
@@ -76,18 +78,19 @@ while s.size()> 0:
         if player_direction[key] == '?':
             
             player_direction[key] = player.current_room.get_room_in_direction(key).id
-            
+            traversal_path.append(key)
             room = player.current_room.get_room_in_direction(key)
             new_player = Player(room)
            
             s.push(new_player)
-            if(new_player.current_room.id, key) not in visited_new:
-                traversal_path.append(key)
-            visited_new.add((new_player.current_room.id, key))
+            # if(new_player.current_room.id, key) not in visited_new:
+            #     traversal_path.append(key)
+            # visited.add((new_player.current_room.id, key))
          
 print("visited", visited_new)
 print("traversal", traversal_path)        
 print(player_graph)
+print("room_paht",room_path)
         
         
        
